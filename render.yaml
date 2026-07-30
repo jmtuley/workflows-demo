@@ -6,3 +6,13 @@ services:
     branch: master
     buildCommand: npm install
     startCommand: npm start
+    envVars:
+      - key: LOG_LEVEL
+        value: info
+      - fromGroup: demo-shared
+
+envVarGroups:
+  - name: demo-shared
+    envVars:
+      - key: FEATURE_FLAG
+        value: "true"
