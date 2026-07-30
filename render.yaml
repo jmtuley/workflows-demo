@@ -2,7 +2,7 @@ services:
   - type: workflow
     name: demo-workflow
     runtime: node
-    region: frankfurt
+    region: oregon
     branch: master
     buildCommand: npm install
     startCommand: npm start
