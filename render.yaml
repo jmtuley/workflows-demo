@@ -10,6 +10,8 @@ services:
       - key: LOG_LEVEL
         value: info
       - fromGroup: demo-shared
+      - key: CH_CH_CHANGES
+        value: stay-the-same
 
 envVarGroups:
   - name: demo-shared
