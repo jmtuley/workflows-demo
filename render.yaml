@@ -12,6 +12,19 @@ services:
       - fromGroup: demo-shared
       - key: CH_CH_CHANGES
         value: stay-the-same
+  - type: workflow
+    name: wild-workflow
+    runtime: node
+    region: oregon
+    branch: master
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: LOG_LEVEL
+        value: info
+      - fromGroup: demo-shared
+      - key: CAPTURED
+        value: true
 
 envVarGroups:
   - name: demo-shared
