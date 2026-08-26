@@ -1,9 +1,8 @@
-# C5: autoDeploy outside {commit, off, checksPass}. Only reached on the UPDATE
-# path, so wf-minimal must already exist.
+# C6: expect "version 2 not supported, only 1 or empty allowed".
+version: "2"
 services:
   - type: workflow
     name: wf-minimal
     runtime: node
     region: oregon
     startCommand: npm start
-    autoDeploy: sometimes
