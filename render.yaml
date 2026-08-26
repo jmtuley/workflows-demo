@@ -1,5 +1,12 @@
-# J (isolated variant of 24): identical in every respect that matters, except
-# the workflow is a dedicated wf-preview rather than wf-minimal.
+# J (production side): what master declares once the preview test is set up.
+# The workflow's startCommand is `npm run production-marker` here, while the PR
+# branch will declare `npm run preview-marker`. The two MUST differ: if both
+# sides declared the same command, a preview leaking into the production
+# workflow would be indistinguishable from nothing happening at all, and J2
+# would silently pass whatever the truth was.
+#
+# Isolated variant of fixture 24: uses a dedicated wf-preview rather than
+# wf-minimal.
 #
 # Two reasons. wf-minimal currently sits in wf-project/prod with wf-shared
 # linked, which adds environment and env-group behavior to a test that is about
@@ -25,4 +32,4 @@ services:
     name: wf-preview
     runtime: node
     region: oregon
-    startCommand: npm run preview-marker
+    startCommand: npm run production-marker
