@@ -1,24 +1,30 @@
-# Exported from Render on 2026-08-26T22:04:11Z
-version: "1"
+# H6: a workflow holding a fromService and a fromDatabase reference, alongside
+# the web service and Postgres it points at. Exporting all three should rewrite
+# both references to the exported names rather than to raw values or ids.
 services:
-- type: workflow
-  name: wf-full
-  runtime: node
-  repo: https://github.com/jmtuley/workflows-demo
-  branch: master
-  region: oregon
-  buildCommand: npm install
-  startCommand: npm start
-  buildFilter:
-    paths:
-    - src/**
-    ignoredPaths:
-    - README.md
-  rootDir: .
-  envVars:
-  - key: GENERATED
-    sync: false
-  - key: PLAIN
-    sync: false
-  autoDeploy: commit
-
+  - type: web
+    name: wf-control
+    runtime: node
+    region: oregon
+    buildCommand: npm install
+    startCommand: npm start
+  - type: workflow
+    name: wf-refs
+    runtime: node
+    region: oregon
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: SVC_HOST
+        fromService:
+          name: wf-control
+          type: web
+          property: host
+      - key: DB_URL
+        fromDatabase:
+          name: wf-db
+          property: connectionString
+databases:
+  - name: wf-db
+    plan: free
+    region: oregon
