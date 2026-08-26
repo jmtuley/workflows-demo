@@ -1,11 +1,15 @@
-# I2: the Workflow struct has no Plan field, unlike Service. Verified locally to
-# be REJECTED, not dropped: the spec decoder runs KnownFields(true) and that
-# survives into the product unmarshaller, so expect
-#   field plan not found in type file.Workflow
+# I3: same as 22 for a batch of service-only fields. All three were verified
+# rejected individually. Use this one to see whether the decoder reports every
+# offending key at once or stops at the first.
 services:
   - type: workflow
     name: wf-minimal
     runtime: node
     region: oregon
     startCommand: npm start
-    plan: starter
+    numInstances: 3
+    healthCheckPath: /healthz
+    disk:
+      name: data
+      mountPath: /var/data
+      sizeGB: 1
