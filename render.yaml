@@ -1,11 +1,15 @@
-# D2: expect "changing region not supported". The rest of the block is
-# unchanged from 10 so the region is the only candidate diff.
+# D3: add two env vars to the existing workflow.
 services:
   - type: workflow
     name: wf-minimal
     runtime: node
-    region: frankfurt
+    region: oregon
     buildCommand: npm ci
     startCommand: npm run worker
     rootDir: src
     autoDeploy: "off"
+    envVars:
+      - key: FIRST
+        value: one
+      - key: SECOND
+        value: two
