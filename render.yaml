@@ -1,9 +1,11 @@
-# C5: autoDeploy outside {commit, off, checksPass}. Only reached on the UPDATE
-# path, so wf-minimal must already exist.
+# D1: same workflow as 01, four fields changed. Expect one "Update workflow
+# wf-minimal" line, not a create.
 services:
   - type: workflow
-    name: wf-autodeploy-new
+    name: wf-minimal
     runtime: node
     region: oregon
-    startCommand: npm start
-    autoDeploy: sometimes
+    buildCommand: npm ci
+    startCommand: npm run worker
+    rootDir: src
+    autoDeploy: "off"
