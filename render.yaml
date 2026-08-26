@@ -1,22 +1,10 @@
-# B2: every field the Workflow struct supports.
+# B4 control: a web service and no workflow at all. If this sync's card renders
+# "Create web service wf-control" but the workflow-only sync renders blank, the
+# blank is specific to workflow actions rather than a broken PlanView.
 services:
-  - type: workflow
-    name: wf-full
+  - type: web
+    name: wf-control
     runtime: node
-    repo: https://github.com/jmtuley/workflows-demo
-    branch: master
     region: oregon
     buildCommand: npm install
     startCommand: npm start
-    rootDir: .
-    autoDeploy: commit
-    buildFilter:
-      paths:
-        - src/**
-      ignoredPaths:
-        - README.md
-    envVars:
-      - key: PLAIN
-        value: hello
-      - key: GENERATED
-        generateValue: true
