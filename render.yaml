@@ -1,8 +1,7 @@
-# C6: expect "version 2 not supported, only 1 or empty allowed".
-version: "2"
+# C4: expect "invalid region: OREGON".
 services:
   - type: workflow
-    name: wf-minimal
+    name: wf-badregion
     runtime: node
-    region: oregon
+    region: OREGON
     startCommand: npm start
