@@ -1,11 +1,11 @@
-# G5: group lives in prod, workflow lives in staging. Expect
-#   workflow can only link to env group "wf-shared" if it's in the same "prod" environment
+# G5 (a): a NEW group in prod, workflow in staging, linked with fromGroup.
+# This is the documented path: the link is being added, not pre-existing.
 projects:
   - name: wf-project
     environments:
       - name: prod
         envVarGroups:
-          - name: wf-shared
+          - name: wf-shared2
             envVars:
               - key: SHARED
                 value: yes
@@ -17,4 +17,4 @@ projects:
             region: oregon
             startCommand: npm start
             envVars:
-              - fromGroup: wf-shared
+              - fromGroup: wf-shared2
