@@ -1,12 +1,22 @@
-# D4: FIRST and SECOND removed from the spec. The planner only ever emits
-# EnvVarsToCreate / EnvVarsToUpdate / EnvGroupsToAdd, so removal is expected to
-# be a NO-OP. Confirm the vars survive on the live workflow.
+# B2: every field the Workflow struct supports.
 services:
   - type: workflow
-    name: wf-minimal
+    name: wf-full
     runtime: node
+    repo: https://github.com/jmtuley/workflows-demo
+    branch: master
     region: oregon
-    buildCommand: npm ci
-    startCommand: npm run worker
-    rootDir: src
-    autoDeploy: "off"
+    buildCommand: npm install
+    startCommand: npm start
+    rootDir: .
+    autoDeploy: commit
+    buildFilter:
+      paths:
+        - src/**
+      ignoredPaths:
+        - README.md
+    envVars:
+      - key: PLAIN
+        value: hello
+      - key: GENERATED
+        generateValue: true
