@@ -1,8 +1,13 @@
-# C1: startCommand omitted. Expect a required-field error on
-# services[0].startCommand. A workflow has no runtime default to fall back on.
+# C7: a web service and a workflow sharing one name. Name uniqueness is only
+# enforced when the flag is ON, so this is also a flag-gating probe.
 services:
+  - type: web
+    name: wf-collide
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
   - type: workflow
-    name: wf-nostart
+    name: wf-collide
     runtime: node
     region: oregon
-    buildCommand: npm install
+    startCommand: npm start
