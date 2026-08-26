@@ -1,7 +1,9 @@
-# C4: expect "invalid region: mars".
+# C5: autoDeploy outside {commit, off, checksPass}. Only reached on the UPDATE
+# path, so wf-minimal must already exist.
 services:
   - type: workflow
-    name: wf-badregion
+    name: wf-minimal
     runtime: node
-    region: mars
+    region: oregon
     startCommand: npm start
+    autoDeploy: sometimes
