@@ -1,11 +1,15 @@
-# E2: must match the CLI-created wf-adopted exactly, so the only action is the
-# capture itself. Adjust these values to whatever `render workflows create`
-# actually produced before syncing.
+# D3: add two env vars to the existing workflow.
 services:
   - type: workflow
-    name: wf-adopted
+    name: wf-minimal
     runtime: node
     region: oregon
-    buildCommand: npm install
-    startCommand: npm start
-    autoDeploy: commit
+    buildCommand: npm ci
+    startCommand: npm run worker
+    rootDir: src
+    autoDeploy: "off"
+    envVars:
+      - key: FIRST
+        value: one
+      - key: SECOND
+        value: two-changed
