@@ -1,4 +1,5 @@
-# G4 happy path: workflow and env group in the same environment.
+# G5: group lives in prod, workflow lives in staging. Expect
+#   workflow can only link to env group "wf-shared" if it's in the same "prod" environment
 projects:
   - name: wf-project
     environments:
@@ -8,6 +9,7 @@ projects:
             envVars:
               - key: SHARED
                 value: yes
+      - name: staging
         services:
           - type: workflow
             name: wf-minimal
