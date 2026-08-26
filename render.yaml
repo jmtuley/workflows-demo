@@ -1,4 +1,6 @@
-# D3: add two env vars to the existing workflow.
+# D4: FIRST and SECOND removed from the spec. The planner only ever emits
+# EnvVarsToCreate / EnvVarsToUpdate / EnvGroupsToAdd, so removal is expected to
+# be a NO-OP. Confirm the vars survive on the live workflow.
 services:
   - type: workflow
     name: wf-minimal
@@ -8,8 +10,3 @@ services:
     startCommand: npm run worker
     rootDir: src
     autoDeploy: "off"
-    envVars:
-      - key: FIRST
-        value: one
-      - key: SECOND
-        value: two-changed
