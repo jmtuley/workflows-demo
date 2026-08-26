@@ -1,8 +1,8 @@
-# B1 happy path: the smallest legal type: workflow block.
-# repo: omitted on purpose so it falls back to the Blueprint's connected repo.
+# C1: startCommand omitted. Expect a required-field error on
+# services[0].startCommand. A workflow has no runtime default to fall back on.
 services:
   - type: workflow
-    name: wf-minimal
+    name: wf-nostart
     runtime: node
     region: oregon
-    startCommand: npm start
+    buildCommand: npm install
