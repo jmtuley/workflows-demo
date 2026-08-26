@@ -1,9 +1,10 @@
-# G1: move an ungrouped workflow into wf-project / prod. Expect an environment
-# move action batched with any other resource heading to the same environment.
+# G2: prod -> staging, same project.
 projects:
   - name: wf-project
     environments:
       - name: prod
+        services: []
+      - name: staging
         services:
           - type: workflow
             name: wf-minimal
