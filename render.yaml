@@ -1,18 +1,8 @@
-# I6b: the cross-section variant. One wf-dupe ungrouped, one under a project
-# environment. Tests whether RecursiveWorkflows walks both sections.
+# B1 happy path: the smallest legal type: workflow block.
+# repo: omitted on purpose so it falls back to the Blueprint's connected repo.
 services:
   - type: workflow
-    name: wf-dupe
+    name: wf-minimal
     runtime: node
     region: oregon
     startCommand: npm start
-projects:
-  - name: wf-project
-    environments:
-      - name: prod
-        services:
-          - type: workflow
-            name: wf-dupe
-            runtime: node
-            region: oregon
-            startCommand: npm run other
