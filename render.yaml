@@ -1,8 +1,22 @@
-# B1 happy path: the smallest legal type: workflow block.
-# repo: omitted on purpose so it falls back to the Blueprint's connected repo.
+# B2: every field the Workflow struct supports.
 services:
   - type: workflow
-    name: wf-minimal
+    name: wf-full
     runtime: node
+    repo: https://github.com/jmtuley/workflows-demo
+    branch: master
     region: oregon
+    buildCommand: npm install
     startCommand: npm start
+    rootDir: .
+    autoDeploy: commit
+    buildFilter:
+      paths:
+        - src/**
+      ignoredPaths:
+        - README.md
+    envVars:
+      - key: PLAIN
+        value: hello
+      - key: GENERATED
+        generateValue: true
