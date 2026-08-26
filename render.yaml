@@ -1,10 +1,11 @@
-# B4 control: a web service and no workflow at all. If this sync's card renders
-# "Create web service wf-control" but the workflow-only sync renders blank, the
-# blank is specific to workflow actions rather than a broken PlanView.
+# E2: must match the CLI-created wf-adopted exactly, so the only action is the
+# capture itself. Adjust these values to whatever `render workflows create`
+# actually produced before syncing.
 services:
-  - type: web
-    name: wf-control
+  - type: workflow
+    name: wf-adopted
     runtime: node
     region: oregon
     buildCommand: npm install
     startCommand: npm start
+    autoDeploy: commit
