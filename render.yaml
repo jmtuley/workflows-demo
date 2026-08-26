@@ -1,11 +1,13 @@
-# I4: wf-race renamed to wf-renamed. Identity is the name, so expect a CREATE of
-# wf-renamed rather than a rename, and wf-race left orphaned.
-# (Uses wf-race rather than wf-minimal so phase G's environment setup survives.)
+# Exported from Render on 2026-08-26T22:01:33Z
+version: "1"
 services:
-  - type: workflow
-    name: wf-renamed
-    runtime: node
-    region: oregon
-    buildCommand: npm install
-    startCommand: npm start
-    autoDeploy: commit
+- type: workflow
+  name: wf-blankrun
+  runtime: node
+  repo: https://github.com/jmtuley/workflows-demo
+  branch: master
+  region: oregon
+  buildCommand: npm install
+  startCommand: ""
+  autoDeploy: "off"
+
