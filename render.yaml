@@ -1,11 +1,11 @@
-# E3 (control for E2): same block as 37 but with a changed startCommand, so the
-# capture rides alongside a genuine run-command diff.
-# wrapper UpdateWorkflow carries a real field change. Expect TWO rendered lines.
+# I2: the Workflow struct has no Plan field, unlike Service. Verified locally to
+# be REJECTED, not dropped: the spec decoder runs KnownFields(true) and that
+# survives into the product unmarshaller, so expect
+#   field plan not found in type file.Workflow
 services:
   - type: workflow
-    name: wf-capture
+    name: wf-minimal
     runtime: node
     region: oregon
-    buildCommand: npm install
-    startCommand: npm run other
-    autoDeploy: commit
+    startCommand: npm start
+    plan: starter
