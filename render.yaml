@@ -1,13 +1,13 @@
-# C7: a web service and a workflow sharing one name. Name uniqueness is only
-# enforced when the flag is ON, so this is also a flag-gating probe.
+# I6a: two workflow blocks in one spec sharing the name wf-dupe, both in the
+# same top-level section. Expect a uniqueness error, not two creates.
 services:
-  - type: web
-    name: wf-collide
-    runtime: node
-    buildCommand: npm install
-    startCommand: npm start
   - type: workflow
-    name: wf-collide
+    name: wf-dupe
     runtime: node
     region: oregon
     startCommand: npm start
+  - type: workflow
+    name: wf-dupe
+    runtime: node
+    region: oregon
+    startCommand: npm run other
