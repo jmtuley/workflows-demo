@@ -1,11 +1,11 @@
-# E2 (visual re-run on the deployed dashboard): matches wf-capture exactly as
-# the CLI created it, so the ONLY action is the capture and the wrapper
-# UpdateWorkflow carries no field changes. Expect one rendered line.
+# E3 (control for E2): same block as 37 but with a changed startCommand, so the
+# capture rides alongside a genuine run-command diff.
+# wrapper UpdateWorkflow carries a real field change. Expect TWO rendered lines.
 services:
   - type: workflow
     name: wf-capture
     runtime: node
     region: oregon
     buildCommand: npm install
-    startCommand: npm start
+    startCommand: npm run other
     autoDeploy: commit
