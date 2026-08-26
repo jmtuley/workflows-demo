@@ -1,13 +1,8 @@
-# G2: prod -> staging, same project.
-projects:
-  - name: wf-project
-    environments:
-      - name: prod
-        services: []
-      - name: staging
-        services:
-          - type: workflow
-            name: wf-minimal
-            runtime: node
-            region: oregon
-            startCommand: npm start
+# G3: pull the workflow back out of the project entirely.
+ungrouped:
+  services:
+    - type: workflow
+      name: wf-minimal
+      runtime: node
+      region: oregon
+      startCommand: npm start
