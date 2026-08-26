@@ -1,8 +1,4 @@
-# G5 (c): the residual gap. wf-minimal already exists and STAYS in prod. A new
-# group lives in staging and the workflow links to it. Update path, so no
-# plan-time scoping check (plannerworkflow.go:268 appends to envGroupsToAdd with
-# no environment comparison), and no move, so the co-move guard cannot fire
-# either. Tests whether anything at all refuses a cross-environment link.
+# G4 happy path: workflow and env group in the same environment.
 projects:
   - name: wf-project
     environments:
@@ -20,10 +16,3 @@ projects:
             startCommand: npm start
             envVars:
               - fromGroup: wf-shared
-              - fromGroup: wf-staging-grp
-      - name: staging
-        envVarGroups:
-          - name: wf-staging-grp
-            envVars:
-              - key: STAGING_ONLY
-                value: yes
