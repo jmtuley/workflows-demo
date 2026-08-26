@@ -1,15 +1,10 @@
-# I3: same as 22 for a batch of service-only fields. All three were verified
-# rejected individually. Use this one to see whether the decoder reports every
-# offending key at once or stops at the first.
+# I8: runtime: docker on a workflow, with a startCommand present. Workflow.Validate
+# checks the runtime only against Render's full runtime list and applies none of
+# the per-runtime rules a service gets, so the non-native ones are expected to
+# pass. Only an unknown runtime should fail.
 services:
   - type: workflow
-    name: wf-minimal
-    runtime: node
+    name: wf-rt-docker
+    runtime: docker
     region: oregon
     startCommand: npm start
-    numInstances: 3
-    healthCheckPath: /healthz
-    disk:
-      name: data
-      mountPath: /var/data
-      sizeGB: 1
