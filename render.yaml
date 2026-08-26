@@ -1,11 +1,10 @@
-# I4: wf-race renamed to wf-renamed. Identity is the name, so expect a CREATE of
-# wf-renamed rather than a rename, and wf-race left orphaned.
-# (Uses wf-race rather than wf-minimal so phase G's environment setup survives.)
+# I7: WF-Renamed declared against an existing wf-renamed. Names are not
+# normalised, so this probably creates a SECOND workflow rather than matching.
 services:
   - type: workflow
-    name: wf-renamed
+    name: WF-Renamed
     runtime: node
-    region: oregon
+    region: OREGON
     buildCommand: npm install
     startCommand: npm start
     autoDeploy: commit
