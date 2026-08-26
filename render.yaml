@@ -1,6 +1,6 @@
-# J (production side): what master declares once the preview test is set up.
-# The workflow's startCommand is `npm run production-marker` here, while the PR
-# branch will declare `npm run preview-marker`. The two MUST differ: if both
+# J (PR branch side): identical to fixture 47 except the workflow declares
+# `npm run preview-marker` while master declares `npm run production-marker`.
+# One line differs between the two, which is the whole point. The two MUST differ: if both
 # sides declared the same command, a preview leaking into the production
 # workflow would be indistinguishable from nothing happening at all, and J2
 # would silently pass whatever the truth was.
@@ -20,7 +20,6 @@
 # groups and artifact sources for a PR preview, but never workflows, so the
 # block below keeps its production name inside the preview. The startCommand
 # is a marker value so a leak into the production workflow is visible.
-# Here's a change
 previews:
   generation: automatic
 services:
@@ -33,4 +32,4 @@ services:
     name: wf-preview
     runtime: node
     region: oregon
-    startCommand: npm run production-marker
+    startCommand: npm run preview-marker
