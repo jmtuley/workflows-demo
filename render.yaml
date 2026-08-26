@@ -1,13 +1,13 @@
-# Exported from Render on 2026-08-26T22:01:33Z
-version: "1"
+# I1 (second half): same workflow, but the spec supplies a real startCommand.
+# The update path should treat the stored-empty run command as drift to correct
+# rather than as a request to clear, so this should repair it.
 services:
-- type: workflow
-  name: wf-blankrun
-  runtime: node
-  repo: https://github.com/jmtuley/workflows-demo
-  branch: master
-  region: oregon
-  buildCommand: npm install
-  startCommand: ""
-  autoDeploy: "off"
-
+  - type: workflow
+    name: wf-blankrun
+    runtime: node
+    repo: https://github.com/jmtuley/workflows-demo
+    branch: master
+    region: oregon
+    buildCommand: npm install
+    startCommand: npm start
+    autoDeploy: "off"
