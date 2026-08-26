@@ -1,7 +1,6 @@
-# C2: startCommand present but empty. Same required-field error as C1.
+# C3: region omitted. Expect "region is required" at plan time (not spec time).
 services:
   - type: workflow
-    name: wf-emptystart
+    name: wf-noregion
     runtime: node
-    region: oregon
-    startCommand: ""
+    startCommand: npm start
