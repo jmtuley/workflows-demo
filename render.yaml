@@ -33,3 +33,5 @@ services:
     runtime: node
     region: oregon
     startCommand: npm run production-marker
+
+# webhook probe: does a push to master trigger an automatic sync?
