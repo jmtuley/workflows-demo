@@ -1,15 +1,13 @@
-# D3: add two env vars to the existing workflow.
+# F3 (repo 1): same block, so Blueprint 1 can win the race first.
+
+
 services:
   - type: workflow
-    name: wf-minimal
+    name: wf-race
     runtime: node
+    repo: https://github.com/jmtuley/workflows-demo
+    branch: master
     region: oregon
-    buildCommand: npm ci
-    startCommand: npm run worker
-    rootDir: src
-    autoDeploy: "off"
-    envVars:
-      - key: FIRST
-        value: one
-      - key: SECOND
-        value: two-changed
+    buildCommand: npm install
+    startCommand: npm start
+    autoDeploy: commit
