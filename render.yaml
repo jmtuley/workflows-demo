@@ -1,15 +1,20 @@
-# G5 (b): the only shape that can reach the plan-time scoping check.
-# wf-shared already exists in prod (created by G4). wf-crosslink is NEW, lives
-# in staging, and links to it. Create path + pre-existing group.
+# G5 (a): a NEW group in prod, workflow in staging, linked with fromGroup.
+# This is the documented path: the link is being added, not pre-existing.
 projects:
   - name: wf-project
     environments:
+      - name: prod
+        envVarGroups:
+          - name: wf-shared2
+            envVars:
+              - key: SHARED
+                value: yes
       - name: staging
         services:
           - type: workflow
-            name: wf-crosslink
+            name: wf-minimal
             runtime: node
             region: oregon
             startCommand: npm start
             envVars:
-              - fromGroup: wf-shared
+              - fromGroup: wf-shared2
