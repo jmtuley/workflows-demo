@@ -1,22 +1,8 @@
-# B2: every field the Workflow struct supports.
+# C1: startCommand omitted. Expect a required-field error on
+# services[0].startCommand. A workflow has no runtime default to fall back on.
 services:
   - type: workflow
-    name: wf-full
+    name: wf-nostart
     runtime: node
-    repo: https://github.com/jmtuley/workflows-demo
-    branch: master
     region: oregon
     buildCommand: npm install
-    startCommand: npm start
-    rootDir: .
-    autoDeploy: commit
-    buildFilter:
-      paths:
-        - src/**
-      ignoredPaths:
-        - README.md
-    envVars:
-      - key: PLAIN
-        value: hello
-      - key: GENERATED
-        generateValue: true
