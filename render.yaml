@@ -1,13 +1,12 @@
-# F3 (repo 1): same block, so Blueprint 1 can win the race first.
-
-
-services:
-  - type: workflow
-    name: wf-race
-    runtime: node
-    repo: https://github.com/jmtuley/workflows-demo
-    branch: master
-    region: oregon
-    buildCommand: npm install
-    startCommand: npm start
-    autoDeploy: commit
+# G1: move an ungrouped workflow into wf-project / prod. Expect an environment
+# move action batched with any other resource heading to the same environment.
+projects:
+  - name: wf-project
+    environments:
+      - name: prod
+        services:
+          - type: workflow
+            name: wf-minimal
+            runtime: node
+            region: oregon
+            startCommand: npm start
