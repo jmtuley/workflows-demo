@@ -1,18 +1,11 @@
-# G4 happy path: workflow and env group in the same environment.
-projects:
-  - name: wf-project
-    environments:
-      - name: prod
-        envVarGroups:
-          - name: wf-shared
-            envVars:
-              - key: SHARED
-                value: yes
-        services:
-          - type: workflow
-            name: wf-minimal
-            runtime: node
-            region: oregon
-            startCommand: npm start
-            envVars:
-              - fromGroup: wf-shared
+# E2 (visual re-run on the deployed dashboard): matches wf-capture exactly as
+# the CLI created it, so the ONLY action is the capture and the wrapper
+# UpdateWorkflow carries no field changes. Expect one rendered line.
+services:
+  - type: workflow
+    name: wf-capture
+    runtime: node
+    region: oregon
+    buildCommand: npm install
+    startCommand: npm start
+    autoDeploy: commit
