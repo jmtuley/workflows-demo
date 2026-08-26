@@ -1,10 +1,11 @@
-# I8: runtime: docker on a workflow, with a startCommand present. Workflow.Validate
-# checks the runtime only against Render's full runtime list and applies none of
-# the per-runtime rules a service gets, so the non-native ones are expected to
-# pass. Only an unknown runtime should fail.
+# I4: wf-race renamed to wf-renamed. Identity is the name, so expect a CREATE of
+# wf-renamed rather than a rename, and wf-race left orphaned.
+# (Uses wf-race rather than wf-minimal so phase G's environment setup survives.)
 services:
   - type: workflow
-    name: wf-rt-docker
-    runtime: docker
+    name: wf-renamed
+    runtime: node
     region: oregon
+    buildCommand: npm install
     startCommand: npm start
+    autoDeploy: commit
