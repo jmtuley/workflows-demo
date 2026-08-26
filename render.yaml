@@ -1,13 +1,18 @@
-# I6a: two workflow blocks in one spec sharing the name wf-dupe, both in the
-# same top-level section. Expect a uniqueness error, not two creates.
+# I6b: the cross-section variant. One wf-dupe ungrouped, one under a project
+# environment. Tests whether RecursiveWorkflows walks both sections.
 services:
   - type: workflow
     name: wf-dupe
     runtime: node
     region: oregon
     startCommand: npm start
-  - type: workflow
-    name: wf-dupe
-    runtime: node
-    region: oregon
-    startCommand: npm run other
+projects:
+  - name: wf-project
+    environments:
+      - name: prod
+        services:
+          - type: workflow
+            name: wf-dupe
+            runtime: node
+            region: oregon
+            startCommand: npm run other
