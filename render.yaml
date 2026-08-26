@@ -1,28 +1,30 @@
-# J (isolated variant of 24): identical in every respect that matters, except
-# the workflow is a dedicated wf-preview rather than wf-minimal.
-#
-# Two reasons. wf-minimal currently sits in wf-project/prod with wf-shared
-# linked, which adds environment and env-group behavior to a test that is about
-# the preview rename step alone. And if J2 fails, meaning the preview does
-# mutate production, the damage lands on a throwaway workflow instead of the
-# resource phases D through G were verified against.
-#
-# Original header follows.
-# J: previews enabled with a workflow block, for the preview-environment phase.
-# spectransform's renameResources suffixes services, databases, redises, env
-# groups and artifact sources for a PR preview, but never workflows, so the
-# block below keeps its production name inside the preview. The startCommand
-# is a marker value so a leak into the production workflow is visible.
-previews:
-  generation: automatic
+# H6: a workflow holding a fromService and a fromDatabase reference, alongside
+# the web service and Postgres it points at. Exporting all three should rewrite
+# both references to the exported names rather than to raw values or ids.
 services:
   - type: web
-    name: wf-companion
+    name: wf-control
     runtime: node
+    region: oregon
     buildCommand: npm install
     startCommand: npm start
   - type: workflow
-    name: wf-preview
+    name: wf-refs
     runtime: node
     region: oregon
-    startCommand: npm run preview-marker
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: SVC_HOST
+        fromService:
+          name: wf-control
+          type: web
+          property: host
+      - key: DB_URL
+        fromDatabase:
+          name: wf-db
+          property: connectionString
+databases:
+  - name: wf-db
+    plan: free
+    region: oregon
