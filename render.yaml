@@ -1,8 +1,7 @@
-# C1: startCommand omitted. Expect a required-field error on
-# services[0].startCommand. A workflow has no runtime default to fall back on.
+# C2: startCommand present but empty. Same required-field error as C1.
 services:
   - type: workflow
-    name: wf-nostart
+    name: wf-emptystart
     runtime: node
     region: oregon
-    buildCommand: npm install
+    startCommand: ""
