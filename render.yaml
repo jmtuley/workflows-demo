@@ -1,10 +1,10 @@
+# B1 happy path: the smallest legal type: workflow block.
+# repo: omitted on purpose so it falls back to the Blueprint's connected repo.
 services:
   - type: workflow
-    name: demo-workflow
+    name: wf-minimal
     runtime: node
     region: oregon
-    branch: master
-    buildCommand: npm install
     startCommand: npm start
     envVars:
       - key: LOG_LEVEL
