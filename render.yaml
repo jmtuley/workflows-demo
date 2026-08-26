@@ -1,12 +1,11 @@
-# G1: move an ungrouped workflow into wf-project / prod. Expect an environment
-# move action batched with any other resource heading to the same environment.
-projects:
-  - name: wf-project
-    environments:
-      - name: prod
-        services:
-          - type: workflow
-            name: wf-minimal
-            runtime: node
-            region: oregon
-            startCommand: npm start
+# G3b: wf-minimal declared top-level with neither `ungrouped` nor
+# project/environment, while the live workflow sits in wf-project / prod.
+# The planner should only propose a move when `ungrouped` is true or both
+# project and environment are set, so this half-specified location must be a
+# no-op rather than an accidental move out of the environment.
+services:
+  - type: workflow
+    name: wf-minimal
+    runtime: node
+    region: oregon
+    startCommand: npm start
